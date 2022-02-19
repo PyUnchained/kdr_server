@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  web:
+    container_name: kdr_server_test_web
+    command: python manage.py runserver 0.0.0.0:80
+    build: 
+      context: ./tests/docker/web_server
+      dockerfile: ./Dockerfile
+    environment:
+      - DJANGO_SETTINGS_MODULE=kdr_test_server.settings
+    volumes:
+      - ./tests/docker/web_server:/code
+      - ./kivy_django_restful:/code/kivy_django_restful
+    ports:
+      - 80:80
